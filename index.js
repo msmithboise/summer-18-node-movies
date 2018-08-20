@@ -11,7 +11,13 @@ server.use(bp.urlencoded({
 
 
 
-//create an endpoint for getting a list of movies
+//create an endpoint for getting a list of movies\
+
+server.get('/movies/', (req, res, next) => {
+  res.status(200).send(movies)
+},
+
+
 
 //create an endpoint for finding a movie by its index
 
@@ -24,13 +30,43 @@ server.get('/movies/title/:title', (req, res, next) => {
   return res.status(400).send({
     error: 'no movie'
   })
-})
+}),
 
 //create an endpoint for finding all movies by their years
+server.get('/movies/year/:year', (req, res, next) => {
+  let movie = movies.filter(m => m.year == req.params.year)
+  if (movies){
+    return res.send(movie)
+  } 
+  return res.status(400).send({
+    error: 'movie not found'
+  })
+}),
+
 //create an endpoint for finding all by rating
+
+server.get('/movies/rating/:year', (req, res, next) =>{
+  let movie = movies.filter(m => m.rating == req.params.year)
+  if (movies){
+    return res.send(movie)
+  }
+  return res.status(400).send({
+    error: 'movie not found'
+  })
+}),
+
+
 //create an endpoint for finding all by tags
 
-
+server.get('/movies/tags/:tags', (req, res, next) =>{
+  let movie = movies.filter(m => m.rating == req.params.year)
+  if (movies){
+    return res.send(movie)
+  }
+  return res.status(400).send({
+    error: 'movie not found'
+  })
+})
 
 
 
